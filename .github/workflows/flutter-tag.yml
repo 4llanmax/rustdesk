@@ -2,6 +2,22 @@ name: Flutter Tag Build
 
 on:
   workflow_dispatch:
+    inputs:
+      rendezvous-server:
+        description: 'Rendezvous Server IP/Domain'
+        required: false
+        type: string
+        default: ''
+      rs-pub-key:
+        description: 'Rendezvous Server Public Key'
+        required: false
+        type: string
+        default: ''
+      api-server:
+        description: 'API Server IP/Domain'
+        required: false
+        type: string
+        default: ''
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
@@ -16,3 +32,6 @@ jobs:
     with:
       upload-artifact: true
       upload-tag: ${{ github.ref_name }}
+      rendezvous-server: ${{ inputs.rendezvous-server }}
+      rs-pub-key: ${{ inputs.rs-pub-key }}
+      api-server: ${{ inputs.api-server }}
